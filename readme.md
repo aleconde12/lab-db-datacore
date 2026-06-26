@@ -3,11 +3,11 @@
 ## Laboratorio para administracion de bases de datos 1
 
 ### 1. Requisitos
-> Instalar SQL Server Express 2022 o equivalente
-> Instalar SQL Server Management Studio (SSMS)
-> Clonarse este repositorio para tener los mismos scripts
-> Abrir el SSMS, usar `.\SQLEXPRESS` como host, `Windows Authentication` como credenciales, y tildar la opcion `Trust Server Certificate` y encrypt `optional`.
-> Con esos pasos, deberiamos tener el motor de base de datos y el cliente funcionando
+- Instalar SQL Server Express 2022 o equivalente
+- Instalar SQL Server Management Studio (SSMS)
+- Clonarse este repositorio para tener los mismos scripts
+- Abrir el SSMS, usar `.\SQLEXPRESS` como host, `Windows Authentication` como credenciales, y tildar la opcion `Trust Server Certificate` y encrypt `optional`.
+- Con esos pasos, deberiamos tener el motor de base de datos y el cliente funcionando
 
 ### 2. Cargar scripts
 
