@@ -527,6 +527,5 @@ to do
 |00_drop_database|borra todo lo creado|
 |01_create_database|crea la db DataCoreRRHH|
 |02_create_schema.sql|usa la db creada en el paso anterior y le agrega un schema adentro|
-|03_create_tables_m2_organizacion.sql|crea 4 tablas|
 
 ### 
