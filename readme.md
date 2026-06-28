@@ -170,13 +170,13 @@ tablas del módulo:
 Guarda las áreas de la empresa.
 
 Ejemplos:
-
+~~~sql
 TI
 Recursos Humanos
 Finanzas
 Administración
-
-Tiene is_active para hacer baja lógica. En vez de borrar un departamento, se marca como inactivo.
+~~~
+Tiene `is_active` para hacer baja lógica. En vez de borrar un departamento, se marca como inactivo.
 
 #### 4.2 job_levels
 
@@ -184,18 +184,21 @@ Representa los niveles jerárquicos y sus rangos salariales.
 
 Ejemplo:
 
-Nivel 1 - Junior       $800.000  a $1.500.000
-Nivel 3 - Semi Senior  $2.000.000 a $3.500.000
-Nivel 5 - Senior       $4.500.000 a $6.000.000
+>Nivel 1 - Junior       $800.000  a $1.500.000
+
+>Nivel 3 - Semi Senior  $2.000.000 a $3.500.000
+
+>Nivel 5 - Senior       $4.500.000 a $6.000.000
 
 La constraint:
 
-CONSTRAINT ck_job_levels_salary_range CHECK (min_salary >= 0 AND max_salary >= min_salary)
+`CONSTRAINT ck_job_levels_salary_range CHECK (min_salary >= 0 AND max_salary >= min_salary)`
 
 evita datos inválidos como:
-
+~~~ sql
 mínimo: 6.000.000
 máximo: 4.500.000
+~~~
 
 #### 4.3 positions
 
@@ -203,14 +206,17 @@ Representa los cargos concretos dentro de un departamento.
 
 Ejemplos:
 
-Analista Senior - TI - Nivel 5
-Gerente TI - TI - Nivel 6
-Analista RRHH - Recursos Humanos - Nivel 3
+>Analista Senior - TI - Nivel 5
+
+>Gerente TI - TI - Nivel 6
+
+>Analista RRHH - Recursos Humanos - Nivel 3
 
 Tiene relación con:
-
+~~~ sql
 departments
 job_levels
+~~~
 
 O sea, un puesto pertenece a un departamento y tiene un nivel jerárquico.
 
@@ -220,18 +226,21 @@ Esta tabla define la jerarquía.
 
 Ejemplo:
 
-Analista Senior reporta a Gerente TI
-Gerente TI reporta a Director de Tecnología
+>Analista Senior reporta a Gerente TI
+
+>Gerente TI reporta a Director de Tecnología
 
 Se usa:
-
+~~~ sql
 position_id
 reports_to_position_id
+~~~
 
 En vez de:
-
+~~~ sql
 employee_id
 reports_to_employee_id
+~~~
 
 Esto es intencional. Como todavía no creamos empleados, M2 puede existir solo. Después M1 registra empleados y los vincula a los puestos.
 
@@ -239,16 +248,19 @@ Importante para la demo
 
 Con estas tablas, después podemos cargar datos así:
 
-Departamento: TI
-Nivel: 5 - Senior
-Cargo: Analista Senior
-Cargo superior: Gerente TI
+>Departamento: TI
+
+>Nivel: 5 - Senior
+
+>Cargo: Analista Senior
+
+>Cargo superior: Gerente TI
 
 Y más adelante, cuando venga M1, el empleado se engancha a positions.
 
 Ejemplo conceptual:
 
-Juan Pérez -> Analista Senior -> TI -> reporta a Gerente TI
+>Juan Pérez -> Analista Senior -> TI -> reporta a Gerente TI
 
 ### 5. Inicio. Correr la base, cargar los scripts
 
