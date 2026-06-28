@@ -217,6 +217,12 @@ $organigrama = fetch_all($conn, "
 
     <h1 class="mb-4">M2 - Organización y Cargos</h1>
 
+    <div class="mb-3">
+        <a href="m1_empleados.php" class="btn btn-outline-secondary btn-sm">
+            Ir a M1 - Empleados
+        </a>
+    </div>
+
     <?php if ($message): ?>
         <div class="alert alert-success"><?= htmlspecialchars($message) ?></div>
     <?php endif; ?>

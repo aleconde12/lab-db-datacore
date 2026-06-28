@@ -267,37 +267,252 @@ Ejemplo conceptual:
 
 >Juan Pérez -> Analista Senior -> TI -> reporta a Gerente TI
 
-### 4. Modulo 1 - Organizacion y cargos
+### 4. Modulo 1 - Empleados y datos personales
 
-La lógica funcional sería:
+Este módulo administra la información principal de los empleados de la empresa.
 
-- Crear empleado
-    - Alta del legajo.
-    - Nombre, apellido, DNI/CUIL.
-    - Fecha de ingreso.
-    - Estado: activo/inactivo.
-    - Relación con departamento/cargo, si ya estamos conectando con el módulo organización.
+Se apoya en el Módulo 2 - Organización, porque cada empleado se vincula a un cargo existente. Ese cargo, a su vez, ya pertenece a un departamento y tiene un nivel jerárquico definido.
 
-- Cargar datos personales
-    - Fecha de nacimiento.
-    - Dirección.
-    - Teléfono.
-    - Email.
+La decisión importante es separar los datos laborales de los datos personales. La tabla `employees` guarda la información laboral principal, mientras que `personal_info` guarda datos complementarios de la persona.
 
-- Documentación
-    - Tipo de documento.
-    - Número o referencia.
+Tablas del módulo:
 
-- Vista de empleados activos
-    - Mostrar empleados activos con sus datos principales
+> `employees`: empleados de la empresa, con legajo, nombre, apellido, DNI/CUIL, fecha de ingreso, estado y cargo asignado.
+
+> `personal_info`: información personal adicional del empleado, como fecha de nacimiento, dirección, teléfono y correo electrónico.
+
+> `documents`: documentación asociada al empleado, por ejemplo DNI, CUIL, contrato, certificado médico u otros documentos internos.
+
+#### 4.1 employees
+
+Guarda la información principal del empleado dentro de la empresa.
+
+Ejemplos:
+
+```sql
+Juan Pérez - Legajo EMP001 - Analista Senior
+María Gómez - Legajo EMP002 - Gerente RRHH
+Carlos López - Legajo EMP003 - Administrativo
+```
+
+Campos principales:
+
+```sql
+employee_code
+first_name
+last_name
+dni_cuil
+hire_date
+position_id
+is_active
+```
+
+Tiene `is_active` para manejar baja lógica. En vez de borrar un empleado, se marca como inactivo.
+
+Esto permite conservar el historial y evitar perder relaciones con otros registros del sistema.
+
+La relación con `positions` permite saber qué cargo ocupa el empleado. Como el cargo ya pertenece a un departamento, no hace falta duplicar el departamento dentro de `employees`.
+
+Ejemplo conceptual:
+
+> Juan Pérez -> Analista Senior -> TI
+
+#### 4.2 personal_info
+
+Guarda datos personales complementarios del empleado.
+
+Ejemplos de datos:
+
+```sql
+Fecha de nacimiento
+Dirección
+Teléfono
+Email personal
+Estado civil
+Nacionalidad
+```
+
+Esta tabla se separa de `employees` para mantener más ordenado el modelo.
+
+La tabla `employees` responde a la pregunta:
+
+> ¿Quién trabaja en la empresa y qué cargo ocupa?
+
+La tabla `personal_info` responde a la pregunta:
+
+> ¿Cuáles son sus datos personales complementarios?
+
+Tiene relación directa con:
+
+```sql
+employees
+```
+
+O sea, cada registro de `personal_info` pertenece a un empleado.
+
+#### 4.3 documents
+
+Guarda la documentación asociada a cada empleado.
+
+Ejemplos:
+
+> DNI
+
+> Constancia de CUIL
+
+> Contrato firmado
+
+> Certificado médico
+
+> Comprobante de domicilio
+
+Campos posibles:
+
+```sql
+document_type
+document_number
+issue_date
+expiration_date
+document_status
+employee_id
+```
+
+La idea es poder consultar qué documentación tiene cargada cada empleado y detectar documentación pendiente o vencida.
+
+Ejemplo:
+
+> Juan Pérez -> DNI -> Presentado
+
+> Juan Pérez -> Contrato -> Presentado
+
+> Juan Pérez -> Certificado médico -> Pendiente
+
+#### 4.4 Vista de empleados activos
+
+Se puede crear una vista llamada:
+
+```sql
+vw_empleados_activos
+```
+
+Esta vista muestra solamente los empleados activos, junto con su cargo y departamento.
+
+Ejemplo de salida esperada:
+
+> Juan Pérez - Analista Senior - TI
+
+> María Gómez - Gerente RRHH - Recursos Humanos
+
+> Carlos López - Administrativo - Administración
+
+Esta vista sirve para la demo porque permite mostrar rápidamente el listado funcional de empleados vigentes.
+
+Importante para la demo
+
+Con estas tablas, el flujo funcional queda así:
+
+> Crear departamento
+
+> Crear nivel jerárquico
+
+> Crear cargo
+
+> Crear empleado
+
+> Asociar empleado al cargo
+
+> Cargar datos personales
+
+> Cargar documentación
+
+Ejemplo conceptual completo:
+
+> Juan Pérez -> Analista Senior -> TI -> empleado activo -> documentación presentada
+
+De esta manera, el Módulo 1 queda conectado con el Módulo 2 y se puede demostrar un circuito completo de alta de empleado dentro de la estructura organizacional.
+
 
 ### 5. Modulo 3 - Nómina y compensación
 
-to do
+Este módulo administra la liquidación salarial de los empleados.
+
+Se apoya en el Módulo 1 - Empleados, porque cada liquidación pertenece a un empleado existente. También se relaciona indirectamente con el Módulo 2 - Organización, ya que el empleado ocupa un cargo y ese cargo tiene un nivel jerárquico asociado.
+
+La decisión importante es separar la cabecera de la liquidación del detalle de conceptos. De esta forma, una liquidación puede tener varios conceptos asociados, como sueldo básico, bonos, presentismo, jubilación u obra social.
+
+Tablas del módulo:
+
+> `payroll_periods`: períodos de liquidación, por ejemplo Junio 2026.
+
+> `compensation_concepts`: conceptos salariales, como sueldo básico, bono, presentismo o descuentos.
+
+> `employee_compensation`: compensaciones asignadas a cada empleado.
+
+> `payroll_headers`: cabecera de liquidación por empleado y período.
+
+> `payroll_details`: detalle de conceptos liquidados dentro de cada recibo.
 
 ### 6. Modulo 4 - Asistencia y tiempo
 
-to do
+Este módulo se engancha directamente con:
+
+~~~ yaml
+M1 - Empleados
+rrhh.employees
+~~~
+
+La idea funcional es registrar asistencia, jornadas, llegadas tarde, ausencias y horas trabajadas.
+
+Tablas:
+
+~~~ yaml
+attendance_types
+work_schedules
+employee_schedules
+attendance_records
+~~~
+
+Explicación rápida:
+
+
+>`attendance_types` Tipos de asistencia o novedad. Ejemplo: PRESENTE, AUSENTE, LLEGADA_TARDE, LICENCIA, VACACIONES, HOME_OFFICE
+
+>`work_schedules` Jornadas laborales esperadas. Ejemplo: Lunes a Viernes 09:00 a 18:00, Turno mañana 08:00 a 14:00, Turno tarde 14:00 a 20:00
+
+>`employee_schedules` Asigna un horario a un empleado. Ejemplo: Juan Pérez -> Lunes a Viernes 09:00 a 18:00
+
+>`attendance_records` Registra la asistencia diaria del empleado. Ejemplo: Juan Pérez - 2026-06-10 - Presente - Entrada 09:05 - Salida 18:00, María Gómez - 2026-06-10 - Home Office, Carlos López - 2026-06-10 - Ausente
+
+Para la demo, el flujo sería:
+
+~~~ yaml
+Crear tipo de asistencia
+Crear horario laboral
+Asignar horario a empleado
+Registrar asistencia diaria
+Consultar resumen de asistencia
+~~~
+
+
+> vista util: `rrhh.vw_asistencia_resumen`
+
+Mostrando:
+
+~~~ yaml
+Empleado | Fecha | Tipo asistencia | Entrada | Salida | Horas trabajadas | Observaciones
+~~~
+
+~~~ bash
+employees
+   |
+   |-- employee_schedules
+   |        |
+   |        |-- work_schedules
+   |
+   |-- attendance_records
+            |
+            |-- attendance_types
+~~~
 
 ### 7. Modulo 5 - Desempeño y desarrollo
 
