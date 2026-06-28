@@ -1,0 +1,9 @@
+# Visual Studio / VS Code / IDE local files
+.vs/
+.vscode/
+
+# Entorno local
+*.log
+
+# Config con credenciales locales
+config.php

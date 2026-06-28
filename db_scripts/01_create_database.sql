@@ -1,0 +1,8 @@
+USE master;
+GO
+
+IF DB_ID('DataCoreRRHH') IS NULL
+BEGIN
+    CREATE DATABASE DataCoreRRHH;
+END
+GO

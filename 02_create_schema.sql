@@ -1,5 +1,0 @@
-USE DataCoreRRHH;
-GO
-
-CREATE SCHEMA rrhh;
-GO

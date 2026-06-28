@@ -7,7 +7,14 @@
 - Instalar SQL Server Management Studio (SSMS)
 - Clonarse este repositorio para tener los mismos scripts
 - Abrir el SSMS, usar `.\SQLEXPRESS` como host, `Windows Authentication` como credenciales, y tildar la opcion `Trust Server Certificate` y encrypt `optional`.
-- Con esos pasos, deberiamos tener el motor de base de datos y el cliente funcionando
+- Correr todos los scripts que comiencen con "create", empezando por el 01
+- Finalizado el paso anterior, abrir una conexion nueva en el SSMS con las opciones:
+ `localhost.\SQLEXPRESS` como host, 
+ `SQL Server Authentication` como metodo de autenticacion, 
+ tildar la opcion `Trust Server Certificate`, 
+ y usar las credenciales `user name = datacore_app`, y `password = Datacore123!`
+- Luego, correr con esta nueva conexion creada, el resto de los scripts, que comienzan con la letra "insert"
+
 
 ### 2. Estructura de modulos
 
