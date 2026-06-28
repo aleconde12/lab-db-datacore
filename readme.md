@@ -262,7 +262,23 @@ Ejemplo conceptual:
 
 >Juan Pérez -> Analista Senior -> TI -> reporta a Gerente TI
 
-### 5. Inicio. Correr la base, cargar los scripts
+### 5. Modulo 1 - Organizacion y cargos
+
+to do
+
+### 6. Modulo 3 - Nómina y compensación
+
+to do
+
+### 7. Modulo 4 - Asistencia y tiempo
+
+to do
+
+### 8. Modulo 5 - Desempeño y desarrollo
+
+to do
+
+### X. Inicio. Correr la base, cargar los scripts
 
 - Ir a File/Open/File, y seleccionar los scripts desde el 01 en adelante, e ir corriendolos uno por uno en orden, con el comando `Execute`, verificando que se esten ejecutando correctamente
 
