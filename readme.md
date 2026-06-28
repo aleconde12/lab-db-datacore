@@ -148,9 +148,7 @@ Este es indice de modulos a utilizar, visto con los nombres de los scripts
 13_demo_flow.sql
 ~~~
 
-### 3. Modulo 1 - 
-
-### 4. Modulo 2- Organizacion
+### 3. Modulo 2- Organizacion
 
 Se empieza por M2 porque define la “estructura base” sobre la que después M1 engancha empleados. La decisión importante: en este se modela jerarquía por cargos/puestos, no por empleados, así no dependemos todavía de M1.
 
@@ -165,7 +163,7 @@ tablas del módulo:
 >reporting_structure: define qué puesto reporta a qué otro puesto.
 
 
-#### 4.1 departments
+#### 3.1 departments
 
 Guarda las áreas de la empresa.
 
@@ -178,7 +176,7 @@ Administración
 ~~~
 Tiene `is_active` para hacer baja lógica. En vez de borrar un departamento, se marca como inactivo.
 
-#### 4.2 job_levels
+#### 3.2 job_levels
 
 Representa los niveles jerárquicos y sus rangos salariales.
 
@@ -200,7 +198,7 @@ mínimo: 6.000.000
 máximo: 4.500.000
 ~~~
 
-#### 4.3 positions
+#### 3.3 positions
 
 Representa los cargos concretos dentro de un departamento.
 
@@ -220,7 +218,7 @@ job_levels
 
 O sea, un puesto pertenece a un departamento y tiene un nivel jerárquico.
 
-#### 4.4 reporting_structure
+#### 3.4 reporting_structure
 
 Esta tabla define la jerarquía.
 
@@ -262,19 +260,19 @@ Ejemplo conceptual:
 
 >Juan Pérez -> Analista Senior -> TI -> reporta a Gerente TI
 
-### 5. Modulo 1 - Organizacion y cargos
+### 4. Modulo 1 - Organizacion y cargos
 
 to do
 
-### 6. Modulo 3 - Nómina y compensación
+### 5. Modulo 3 - Nómina y compensación
 
 to do
 
-### 7. Modulo 4 - Asistencia y tiempo
+### 6. Modulo 4 - Asistencia y tiempo
 
 to do
 
-### 8. Modulo 5 - Desempeño y desarrollo
+### 7. Modulo 5 - Desempeño y desarrollo
 
 to do
 
