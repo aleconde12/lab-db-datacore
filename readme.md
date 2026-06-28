@@ -9,7 +9,7 @@
 - Abrir el SSMS, usar `.\SQLEXPRESS` como host, `Windows Authentication` como credenciales, y tildar la opcion `Trust Server Certificate` y encrypt `optional`.
 - Con esos pasos, deberiamos tener el motor de base de datos y el cliente funcionando
 
-### 2. Modulos
+### 2. Estructura de modulos
 
 Primero debemos comprender que modulos van a crearse, y que tablas contiene cada uno
 
@@ -148,8 +148,20 @@ Este es indice de modulos a utilizar, visto con los nombres de los scripts
 13_demo_flow.sql
 ~~~
 
+### 3. Modulo 1 - 
 
-### 3. Inicio. Correr la base, cargar los scripts
+### 4. Modulo 2- Organizacion
+
+Se empieza por M2 porque define la “estructura base” sobre la que después M1 engancha empleados. La decisión importante: en este se modela jerarquía por cargos/puestos, no por empleados, así no dependemos todavía de M1.
+
+tablas del módulo:
+
+>departments: áreas de la empresa, por ejemplo TI, RRHH, Finanzas.
+>job_levels: niveles jerárquicos, por ejemplo Nivel 1, Nivel 2, Nivel 5.
+>positions: cargos/puestos, por ejemplo Analista Senior, Gerente TI.
+>reporting_structure: define qué puesto reporta a qué otro puesto.
+
+### 5. Inicio. Correr la base, cargar los scripts
 
 - Ir a File/Open/File, y seleccionar los scripts desde el 01 en adelante, e ir corriendolos uno por uno en orden, con el comando `Execute`, verificando que se esten ejecutando correctamente
 
@@ -158,4 +170,6 @@ Este es indice de modulos a utilizar, visto con los nombres de los scripts
 |00_drop_database|borra todo lo creado|
 |01_create_database|crea la db DataCoreRRHH|
 |02_create_schema.sql|usa la db creada en el paso anterior y le agrega un schema adentro|
-|03_create_tables.sql|crea 4 tablas|
+|03_create_tables_m2_organizacion.sql|crea 4 tablas|
+
+### 
