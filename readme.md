@@ -155,7 +155,7 @@ Este es indice de modulos a utilizar, visto con los nombres de los scripts
 13_demo_flow.sql
 ~~~
 
-### 3. Modulo 2- Organizacion
+### 3. Modulo 2 - Organizacion
 
 Se empieza por M2 porque define la “estructura base” sobre la que después M1 engancha empleados. La decisión importante: en este se modela jerarquía por cargos/puestos, no por empleados, así no dependemos todavía de M1.
 
@@ -269,7 +269,27 @@ Ejemplo conceptual:
 
 ### 4. Modulo 1 - Organizacion y cargos
 
-to do
+La lógica funcional sería:
+
+- Crear empleado
+    - Alta del legajo.
+    - Nombre, apellido, DNI/CUIL.
+    - Fecha de ingreso.
+    - Estado: activo/inactivo.
+    - Relación con departamento/cargo, si ya estamos conectando con el módulo organización.
+
+- Cargar datos personales
+    - Fecha de nacimiento.
+    - Dirección.
+    - Teléfono.
+    - Email.
+
+- Documentación
+    - Tipo de documento.
+    - Número o referencia.
+
+- Vista de empleados activos
+    - Mostrar empleados activos con sus datos principales
 
 ### 5. Modulo 3 - Nómina y compensación
 
