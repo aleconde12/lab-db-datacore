@@ -157,11 +157,11 @@ Se empieza por M2 porque define la “estructura base” sobre la que después M
 tablas del módulo:
 
 >departments: áreas de la empresa, por ejemplo TI, RRHH, Finanzas.
->
+
 >job_levels: niveles jerárquicos, por ejemplo Nivel 1, Nivel 2, Nivel 5.
->
+
 >positions: cargos/puestos, por ejemplo Analista Senior, Gerente TI.
->
+
 >reporting_structure: define qué puesto reporta a qué otro puesto.
 
 
