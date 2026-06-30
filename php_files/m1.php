@@ -204,11 +204,11 @@ $documents = fetch_all($conn, "
     <h1 class="mb-4">M1 - Empleados</h1>
 
     <div class="mb-3">
-        <a href="m1_empleados.php" class="btn btn-primary btn-sm">M1 - Empleados</a>
-        <a href="m2_organizacion.php" class="btn btn-outline-secondary btn-sm">M2 - Organización</a>
-        <a href="m3_nomina.php" class="btn btn-outline-secondary btn-sm">M3 - Nómina</a>
-        <a href="m4_asistencia.php" class="btn btn-outline-secondary btn-sm">M4 - Asistencia</a>
-        <a href="m5_desempeno_capacitacion.php" class="btn btn-outline-secondary btn-sm">M5 - Desempeño</a>
+        <a href="m1.php" class="btn btn-primary btn-sm">M1 - Empleados</a>
+        <a href="m2.php" class="btn btn-outline-secondary btn-sm">M2 - Organización</a>
+        <a href="m3.php" class="btn btn-outline-secondary btn-sm">M3 - Nómina</a>
+        <a href="m4.php" class="btn btn-outline-secondary btn-sm">M4 - Asistencia</a>
+        <a href="m5.php" class="btn btn-outline-secondary btn-sm">M5 - Desempeño</a>
     </div>
 
     <?php if ($message): ?>
